@@ -1,0 +1,11 @@
+framework module carrotquest_sdk {
+  umbrella header "carrotquest_sdk-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module carrotquest_sdk.Swift {
+  header "carrotquest_sdk-Swift.h"
+  requires objc
+}
