@@ -25,8 +25,8 @@ class MethodChannelCarrotquestSdk extends CarrotquestSdkPlatform {
 
   @override
   Future<void> setup(String appId, String apiKey, String? appGroup) async {
-    await methodChannel
-        .invokeMethod<String>('setup', {'api_key': apiKey, 'app_id': appId, 'app_group': appGroup});
+    await methodChannel.invokeMethod<String>(
+        'setup', {'api_key': apiKey, 'app_id': appId, 'app_group': appGroup});
     return;
   }
 
@@ -61,12 +61,6 @@ class MethodChannelCarrotquestSdk extends CarrotquestSdkPlatform {
   Future<void> openChat() async {
     await methodChannel.invokeMethod<String>('openChat');
     return;
-  }
-
-  @override
-  Future<String?> getWebVersion() async {
-    final version = await methodChannel.invokeMethod<String>('getWebVersion');
-    return version;
   }
 
   @override

@@ -3,10 +3,6 @@ import 'package:carrotquest_sdk/user_property/user_property.dart';
 import 'carrotquest_sdk_platform_interface.dart';
 
 class Carrot {
-  static Future<String?> getWebVersion() {
-    return CarrotquestSdkPlatform.instance.getWebVersion();
-  }
-
   /// Setup SDK
   static Future<void> setup(String appId, String apiKey, {String? appGroup}) {
     return CarrotquestSdkPlatform.instance.setup(appId, apiKey, appGroup);
@@ -16,13 +12,6 @@ class Carrot {
   static Future<void> auth(userId, userAuthKey) {
     return CarrotquestSdkPlatform.instance.auth(userId, userAuthKey);
   }
-
-  /// Deinitialisation SDK
-  /// Only for Android
-  // Future<void> deInit() {
-  //   // TODO
-  //   return Future.value();
-  // }
 
   /// Deinitialisation SDK
   static Future<void> logOut() {
@@ -54,16 +43,19 @@ class Carrot {
     return CarrotquestSdkPlatform.instance.getUnreadConversationsCountStream();
   }
 
+  /// Send FCM Token to Carrot quest
   static Future<void> sendFcmToken(String token) {
     return CarrotquestSdkPlatform.instance.sendFcmToken(token);
   }
 
+  /// Send FCM push to Carrot quest SDK
   static Future<void> sendFirebasePushNotification(
       Map<String, dynamic> message) {
     return CarrotquestSdkPlatform.instance
         .sendFirebasePushNotification(message);
   }
 
+  /// Check Carrot quest push
   static bool isCarrotQuestPush(Map<String, dynamic> message) {
     return message['is_carrot'] != null;
   }

@@ -51,11 +51,6 @@ class MockCarrotquestSdkPlatform
   }
 
   @override
-  Future<String?> getWebVersion() {
-    return Future.value("test");
-  }
-
-  @override
   Future<void> logOut() {
     return Future.value();
   }

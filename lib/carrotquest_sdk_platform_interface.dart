@@ -70,8 +70,4 @@ abstract class CarrotquestSdkPlatform extends PlatformInterface {
     throw UnimplementedError(
         'getUnreadConversationsCountStream() has not been implemented.');
   }
-
-  Future<String?> getWebVersion() {
-    throw UnimplementedError('getWebVersion() has not been implemented.');
-  }
 }
