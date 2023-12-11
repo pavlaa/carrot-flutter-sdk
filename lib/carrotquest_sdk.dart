@@ -59,4 +59,14 @@ class Carrot {
   static bool isCarrotQuestPush(Map<String, dynamic> message) {
     return message['is_carrot'] != null;
   }
+
+  /// Unsubscribe from all push notifications
+  static Future<void> pushNotificationsUnsubscribe() {
+    return CarrotquestSdkPlatform.instance.pushNotificationsUnsubscribe();
+  }
+
+  /// Unsubscribe from campaigns push notifications
+  static Future<void> pushCampaignsUnsubscribe() {
+    return CarrotquestSdkPlatform.instance.pushCampaignsUnsubscribe();
+  }
 }

@@ -59,6 +59,16 @@ class MockCarrotquestSdkPlatform
   Stream<int> getUnreadConversationsCountStream() {
     return Stream.value(0);
   }
+
+  @override
+  Future<void> pushCampaignsUnsubscribe() {
+    return Future.value();
+  }
+
+  @override
+  Future<void> pushNotificationsUnsubscribe() {
+    return Future.value();
+  }
 }
 
 void main() {

@@ -42,7 +42,7 @@ class _MyAppState extends State<MyApp> {
   /// AppGroup - общее хранилище данных для разных приложений одного разработчика.
   /// Он позволяет обменитьвася данными между приложением и Notification Service Extension.
   /// Создать его можно в https://developer.apple.com/account/resources/identifiers/list/applicationGroup
-  final String _appGroup = "";
+  final String _appGroup = "group.cq.flutterSdkExample";
 
   int unreadConversationsCount = 0;
 
@@ -199,6 +199,55 @@ class _MyAppState extends State<MyApp> {
                 ),
               )
             ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _unsubscribePushNotifications(BuildContext con) {
+    showModalBottomSheet(
+      context: con,
+      useSafeArea: true,
+      isScrollControlled: true,
+      builder: (context) {
+        return SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(
+                right: 32,
+                top: 24,
+                left: 32,
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Carrot.pushNotificationsUnsubscribe()
+                        .then((value) => Navigator.pop(con))
+                        .onError((error, stackTrace) => Navigator.pop(con));
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    child: const Text("Unsubscribe all push notifications"),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Carrot.pushCampaignsUnsubscribe()
+                        .then((value) => Navigator.pop(con))
+                        .onError((error, stackTrace) => Navigator.pop(con));
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    child:
+                        const Text("Unsubscribe campaigns push notifications"),
+                  ),
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
           ),
         );
       },
@@ -401,6 +450,26 @@ class _MyAppState extends State<MyApp> {
                     child: const Padding(
                       padding: EdgeInsets.all(20),
                       child: Text("Change custom properties"),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Carrot.trackEvent("Tap 'show push' button");
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Text("Show push"),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Carrot.trackEvent("Tap button",
+                          params: {"Button": "Unsubscribe push notifications"});
+                      _unsubscribePushNotifications(mContext);
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Text("Unsubscribe push notifications"),
                     ),
                   ),
                   TextButton(

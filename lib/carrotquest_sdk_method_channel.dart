@@ -103,4 +103,18 @@ class MethodChannelCarrotquestSdk extends CarrotquestSdkPlatform {
     });
     return _unreadConversationsCountStreamController.stream.asBroadcastStream();
   }
+
+  @override
+  Future<void> pushNotificationsUnsubscribe() async {
+    return methodChannel
+        .invokeMethod<String>('pushNotificationsUnsubscribe')
+        .then((value) => value);
+  }
+
+  @override
+  Future<void> pushCampaignsUnsubscribe() async {
+    return methodChannel
+        .invokeMethod<String>('pushCampaignsUnsubscribe')
+        .then((value) => value);
+  }
 }

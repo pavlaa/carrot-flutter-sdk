@@ -70,4 +70,14 @@ abstract class CarrotquestSdkPlatform extends PlatformInterface {
     throw UnimplementedError(
         'getUnreadConversationsCountStream() has not been implemented.');
   }
+
+  Future<void> pushNotificationsUnsubscribe() {
+    throw UnimplementedError(
+        'pushNotificationsUnsubscribe() has not been implemented.');
+  }
+
+  Future<void> pushCampaignsUnsubscribe() {
+    throw UnimplementedError(
+        'pushCampaignsUnsubscribe() has not been implemented.');
+  }
 }

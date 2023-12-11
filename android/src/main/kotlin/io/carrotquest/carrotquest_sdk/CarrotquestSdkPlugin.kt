@@ -85,12 +85,22 @@ class CarrotquestSdkPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
             return
         }
 
-
         if (call.method == "getPlatformVersion") {
             result.success("Android ${android.os.Build.VERSION.RELEASE}")
-        } else {
-            result.notImplemented()
+            return
         }
+
+        if(call.method == "pushNotificationsUnsubscribe") {
+            pushNotificationsUnsubscribe(result)
+            return
+        }
+
+        if(call.method == "pushCampaignsUnsubscribe") {
+            pushCampaignsUnsubscribe(result)
+            return
+        }
+
+        result.notImplemented()
     }
 
     // override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
@@ -366,6 +376,24 @@ class CarrotquestSdkPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
         try {
             val count =  Carrot.getUnreadConversations().size
             result.success(count)
+        } catch (e: Exception) {
+            result.error(e.localizedMessage, null, null)
+        }
+    }
+
+    private fun pushNotificationsUnsubscribe(@NonNull result: MethodChannel.Result) {
+        try {
+            Carrot.pushNotificationsUnsubscribe()
+            result.success(null)
+        } catch (e: Exception) {
+            result.error(e.localizedMessage, null, null)
+        }
+    }
+
+    private fun pushCampaignsUnsubscribe(@NonNull result: MethodChannel.Result) {
+        try {
+            Carrot.pushCampaignsUnsubscribe()
+            result.success(null)
         } catch (e: Exception) {
             result.error(e.localizedMessage, null, null)
         }
