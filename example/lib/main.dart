@@ -38,6 +38,7 @@ class _MyAppState extends State<MyApp> {
   final String _appId = "";
   final String _apiKey = "";
   final String _userAuthKey = "";
+  final bool _isLightTheme = true;
 
   /// AppGroup - общее хранилище данных для разных приложений одного разработчика.
   /// Он позволяет обменитьвася данными между приложением и Notification Service Extension.
@@ -59,14 +60,11 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> _initCarrotSdk() {
-    return Carrot.setup(_appId, _apiKey, appGroup: _appGroup)
-        .then((value) async {
-      await Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform);
+    return Carrot.setup(_appId, _apiKey, _isLightTheme, appGroup: _appGroup).then((value) async {
+      await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
       await FirebaseMessaging.instance.setAutoInitEnabled(true);
 
-      FirebaseMessaging.onBackgroundMessage(
-          _firebaseMessagingBackgroundHandler);
+      FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
       String? token = await FirebaseMessaging.instance.getToken();
 
@@ -93,10 +91,7 @@ class _MyAppState extends State<MyApp> {
       builder: (context) {
         return Padding(
           padding: EdgeInsets.only(
-              right: 32,
-              top: 24,
-              left: 32,
-              bottom: MediaQuery.of(context).viewInsets.bottom),
+              right: 32, top: 24, left: 32, bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -104,8 +99,7 @@ class _MyAppState extends State<MyApp> {
               TextField(
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
-                    hintText: "Input your id (phone, email, etc.)",
-                    border: OutlineInputBorder()),
+                    hintText: "Input your id (phone, email, etc.)", border: OutlineInputBorder()),
                 controller: controller,
               ),
               const SizedBox(height: 20),
@@ -142,21 +136,16 @@ class _MyAppState extends State<MyApp> {
       useSafeArea: true,
       isScrollControlled: true,
       builder: (context) {
-        final List<DropdownMenuEntry<UserProperty>> entries =
-            <DropdownMenuEntry<UserProperty>>[];
+        final List<DropdownMenuEntry<UserProperty>> entries = <DropdownMenuEntry<UserProperty>>[];
 
         for (var element in CarrotProperty.values) {
           entries.add(DropdownMenuEntry(
-              value: CarrotUserProperty(property: element, value: ""),
-              label: element.name));
+              value: CarrotUserProperty(property: element, value: ""), label: element.name));
         }
 
         return Padding(
           padding: EdgeInsets.only(
-              right: 32,
-              top: 24,
-              left: 32,
-              bottom: MediaQuery.of(context).viewInsets.bottom),
+              right: 32, top: 24, left: 32, bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -171,8 +160,7 @@ class _MyAppState extends State<MyApp> {
               const SizedBox(height: 8),
               TextField(
                 keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
-                    hintText: "Value", border: OutlineInputBorder()),
+                decoration: const InputDecoration(hintText: "Value", border: OutlineInputBorder()),
                 controller: controller,
               ),
               const SizedBox(height: 20),
@@ -188,8 +176,8 @@ class _MyAppState extends State<MyApp> {
 
                   if (selectedProp is CarrotUserProperty) {
                     _carrot
-                        .setUserProperty((selectedProp as CarrotUserProperty)
-                            .copyWith(newValue: valueProperty))
+                        .setUserProperty(
+                            (selectedProp as CarrotUserProperty).copyWith(newValue: valueProperty))
                         .then((value) => Navigator.pop(con));
                   }
                 },
@@ -214,10 +202,7 @@ class _MyAppState extends State<MyApp> {
         return SafeArea(
           child: Padding(
             padding: EdgeInsets.only(
-                right: 32,
-                top: 24,
-                left: 32,
-                bottom: MediaQuery.of(context).viewInsets.bottom),
+                right: 32, top: 24, left: 32, bottom: MediaQuery.of(context).viewInsets.bottom),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -241,8 +226,7 @@ class _MyAppState extends State<MyApp> {
                   },
                   child: Container(
                     padding: const EdgeInsets.all(8),
-                    child:
-                        const Text("Unsubscribe campaigns push notifications"),
+                    child: const Text("Unsubscribe campaigns push notifications"),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -263,21 +247,16 @@ class _MyAppState extends State<MyApp> {
       useSafeArea: true,
       isScrollControlled: true,
       builder: (context) {
-        final List<DropdownMenuEntry<UserProperty>> entries =
-            <DropdownMenuEntry<UserProperty>>[];
+        final List<DropdownMenuEntry<UserProperty>> entries = <DropdownMenuEntry<UserProperty>>[];
 
         for (var element in EcommerceProperty.values) {
           entries.add(DropdownMenuEntry(
-              value: EcommerceUserProperty(property: element, value: ""),
-              label: element.name));
+              value: EcommerceUserProperty(property: element, value: ""), label: element.name));
         }
 
         return Padding(
           padding: EdgeInsets.only(
-              right: 32,
-              top: 24,
-              left: 32,
-              bottom: MediaQuery.of(context).viewInsets.bottom),
+              right: 32, top: 24, left: 32, bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -292,8 +271,7 @@ class _MyAppState extends State<MyApp> {
               const SizedBox(height: 8),
               TextField(
                 keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
-                    hintText: "Value", border: OutlineInputBorder()),
+                decoration: const InputDecoration(hintText: "Value", border: OutlineInputBorder()),
                 controller: controller,
               ),
               const SizedBox(height: 20),
@@ -336,10 +314,7 @@ class _MyAppState extends State<MyApp> {
       builder: (context) {
         return Padding(
           padding: EdgeInsets.only(
-              right: 32,
-              top: 24,
-              left: 32,
-              bottom: MediaQuery.of(context).viewInsets.bottom),
+              right: 32, top: 24, left: 32, bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -347,15 +322,13 @@ class _MyAppState extends State<MyApp> {
               const SizedBox(height: 8),
               TextField(
                 keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
-                    hintText: "Name", border: OutlineInputBorder()),
+                decoration: const InputDecoration(hintText: "Name", border: OutlineInputBorder()),
                 controller: nameController,
               ),
               const SizedBox(height: 8),
               TextField(
                 keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
-                    hintText: "Value", border: OutlineInputBorder()),
+                decoration: const InputDecoration(hintText: "Value", border: OutlineInputBorder()),
                 controller: valueController,
               ),
               const SizedBox(height: 20),
@@ -368,8 +341,7 @@ class _MyAppState extends State<MyApp> {
                   }
 
                   _carrot
-                      .setUserProperty(UserProperty(
-                          name: nameProperty, value: valueProperty))
+                      .setUserProperty(UserProperty(name: nameProperty, value: valueProperty))
                       .then((value) => Navigator.pop(con));
                 },
                 child: Container(
@@ -410,8 +382,7 @@ class _MyAppState extends State<MyApp> {
                 children: [
                   TextButton(
                     onPressed: () {
-                      Carrot.trackEvent("Tap button",
-                          params: {"Button": "Auth user"});
+                      Carrot.trackEvent("Tap button", params: {"Button": "Auth user"});
                       _auth(mContext);
                     },
                     child: const Padding(
@@ -474,8 +445,7 @@ class _MyAppState extends State<MyApp> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Carrot.trackEvent("Tap button",
-                          params: {"Button": "Log out"}).then((value) {
+                      Carrot.trackEvent("Tap button", params: {"Button": "Log out"}).then((value) {
                         Carrot.logOut();
                       });
                     },
