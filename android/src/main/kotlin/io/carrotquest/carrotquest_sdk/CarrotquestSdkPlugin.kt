@@ -8,6 +8,7 @@ import androidx.annotation.NonNull
 import com.google.firebase.messaging.RemoteMessage
 import io.carrotquest_sdk.android.Carrot
 import io.carrotquest_sdk.android.Carrot.Callback
+import io.carrotquest_sdk.android.core.main.ThemeSdk
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -26,6 +27,7 @@ class CarrotquestSdkPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
     private var appId: String? = null
     private var apiKey: String? = null
+    private var isLightTheme: Boolean? = null
 
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
@@ -148,6 +150,7 @@ class CarrotquestSdkPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
         apiKey = call.argument<String?>("api_key")
         appId = call.argument<String?>("app_id")
+        isLightTheme = call.argument<Boolean?>("is_light_theme")
         if (apiKey == null || appId == null) {
             result.error("An error has occurred, the apiKey or appId is null.", null, null)
             return
@@ -171,6 +174,11 @@ class CarrotquestSdkPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
                                     
                                 }
                             })
+                            if (isLightTheme == true) {
+                                Carrot.setTheme(ThemeSdk.DARK)
+                            } else {
+                                Carrot.setTheme(ThemeSdk.LIGHT)
+                            }
                             result.success(null)
                         } else {
                             result.error("Setup is failed", null, null)

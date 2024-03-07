@@ -28,7 +28,7 @@ abstract class CarrotquestSdkPlatform extends PlatformInterface {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 
-  Future<void> setup(String appId, String apiKey, String? appGroup) {
+  Future<void> setup(String appId, String apiKey, bool isLightTheme, String? appGroup) {
     throw UnimplementedError('setup() has not been implemented.');
   }
 
@@ -45,8 +45,7 @@ abstract class CarrotquestSdkPlatform extends PlatformInterface {
   }
 
   Future<void> sendFirebasePushNotification(Map<String, dynamic> message) {
-    throw UnimplementedError(
-        'sendFirebasePushNotification() has not been implemented.');
+    throw UnimplementedError('sendFirebasePushNotification() has not been implemented.');
   }
 
   Future<void> openChat() {
@@ -62,22 +61,18 @@ abstract class CarrotquestSdkPlatform extends PlatformInterface {
   }
 
   Future<int> getUnreadConversationsCount() {
-    throw UnimplementedError(
-        'getunreadConversationsCount() has not been implemented.');
+    throw UnimplementedError('getunreadConversationsCount() has not been implemented.');
   }
 
   Stream<int> getUnreadConversationsCountStream() {
-    throw UnimplementedError(
-        'getUnreadConversationsCountStream() has not been implemented.');
+    throw UnimplementedError('getUnreadConversationsCountStream() has not been implemented.');
   }
 
   Future<void> pushNotificationsUnsubscribe() {
-    throw UnimplementedError(
-        'pushNotificationsUnsubscribe() has not been implemented.');
+    throw UnimplementedError('pushNotificationsUnsubscribe() has not been implemented.');
   }
 
   Future<void> pushCampaignsUnsubscribe() {
-    throw UnimplementedError(
-        'pushCampaignsUnsubscribe() has not been implemented.');
+    throw UnimplementedError('pushCampaignsUnsubscribe() has not been implemented.');
   }
 }

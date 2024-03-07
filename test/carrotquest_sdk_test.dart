@@ -4,9 +4,7 @@ import 'package:carrotquest_sdk/carrotquest_sdk_method_channel.dart';
 import 'package:carrotquest_sdk/carrotquest_sdk_platform_interface.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-class MockCarrotquestSdkPlatform
-    with MockPlatformInterfaceMixin
-    implements CarrotquestSdkPlatform {
+class MockCarrotquestSdkPlatform with MockPlatformInterfaceMixin implements CarrotquestSdkPlatform {
   @override
   Future<String?> getPlatformVersion() => Future.value('42');
 
@@ -16,7 +14,7 @@ class MockCarrotquestSdkPlatform
   }
 
   @override
-  Future<void> setup(String appId, String apiKey, String? appGroup) {
+  Future<void> setup(String appId, String apiKey, bool isLightTheme, String? appGroup) {
     return Future.value();
   }
 
@@ -72,8 +70,7 @@ class MockCarrotquestSdkPlatform
 }
 
 void main() {
-  final CarrotquestSdkPlatform initialPlatform =
-      CarrotquestSdkPlatform.instance;
+  final CarrotquestSdkPlatform initialPlatform = CarrotquestSdkPlatform.instance;
 
   test('$MethodChannelCarrotquestSdk is the default instance', () {
     expect(initialPlatform, isInstanceOf<MethodChannelCarrotquestSdk>());

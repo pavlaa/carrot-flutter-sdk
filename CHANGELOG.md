@@ -1,3 +1,6 @@
+## 0.0.4
+- Add possibility select chat theme mode
+
 ## 0.0.3 
 - Fixed problems with receiving messages from bots
 - Fixed other problems related to bots

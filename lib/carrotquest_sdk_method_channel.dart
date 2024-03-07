@@ -9,8 +9,7 @@ import 'carrotquest_sdk_platform_interface.dart';
 
 /// An implementation of [CarrotquestSdkPlatform] that uses method channels.
 class MethodChannelCarrotquestSdk extends CarrotquestSdkPlatform {
-  final StreamController<int> _unreadConversationsCountStreamController =
-      StreamController<int>();
+  final StreamController<int> _unreadConversationsCountStreamController = StreamController<int>();
 
   /// The method channel used to interact with the native platform.
   @visibleForTesting
@@ -18,22 +17,28 @@ class MethodChannelCarrotquestSdk extends CarrotquestSdkPlatform {
 
   @override
   Future<String?> getPlatformVersion() async {
-    final version =
-        await methodChannel.invokeMethod<String>('getPlatformVersion');
+    final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
   }
 
   @override
-  Future<void> setup(String appId, String apiKey, String? appGroup) async {
+  Future<void> setup(String appId, String apiKey, bool isLightTheme, String? appGroup) async {
     await methodChannel.invokeMethod<String>(
-        'setup', {'api_key': apiKey, 'app_id': appId, 'app_group': appGroup});
+      'setup',
+      {
+        'api_key': apiKey,
+        'app_id': appId,
+        'is_light_theme': isLightTheme,
+        'app_group': appGroup,
+      },
+    );
     return;
   }
 
   @override
   Future<void> auth(userId, userAuthKey) async {
-    await methodChannel.invokeMethod<String>(
-        'auth', {'user_id': userId, 'user_auth_key': userAuthKey});
+    await methodChannel
+        .invokeMethod<String>('auth', {'user_id': userId, 'user_auth_key': userAuthKey});
     return;
   }
 
@@ -50,10 +55,8 @@ class MethodChannelCarrotquestSdk extends CarrotquestSdkPlatform {
   }
 
   @override
-  Future<void> sendFirebasePushNotification(
-      Map<String, dynamic> message) async {
-    await methodChannel.invokeMethod<String>(
-        'sendFirebasePushNotification', {'data': message});
+  Future<void> sendFirebasePushNotification(Map<String, dynamic> message) async {
+    await methodChannel.invokeMethod<String>('sendFirebasePushNotification', {'data': message});
     return;
   }
 
@@ -65,8 +68,8 @@ class MethodChannelCarrotquestSdk extends CarrotquestSdkPlatform {
 
   @override
   Future<void> setUserProperty(UserProperty property) async {
-    await methodChannel.invokeMethod<String>(
-        'setUserProperty', {'key': property.name, 'value': property.value});
+    await methodChannel
+        .invokeMethod<String>('setUserProperty', {'key': property.name, 'value': property.value});
     return;
   }
 
@@ -76,8 +79,7 @@ class MethodChannelCarrotquestSdk extends CarrotquestSdkPlatform {
       await methodChannel.invokeMethod<String>('trackEvent', {'event': event});
     } else {
       String paramsStr = json.encode(params);
-      await methodChannel.invokeMethod<String>(
-          'trackEvent', {'event': event, 'params': paramsStr});
+      await methodChannel.invokeMethod<String>('trackEvent', {'event': event, 'params': paramsStr});
     }
 
     return;
@@ -113,8 +115,6 @@ class MethodChannelCarrotquestSdk extends CarrotquestSdkPlatform {
 
   @override
   Future<void> pushCampaignsUnsubscribe() async {
-    return methodChannel
-        .invokeMethod<String>('pushCampaignsUnsubscribe')
-        .then((value) => value);
+    return methodChannel.invokeMethod<String>('pushCampaignsUnsubscribe').then((value) => value);
   }
 }

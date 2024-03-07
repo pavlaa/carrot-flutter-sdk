@@ -4,8 +4,8 @@ import 'carrotquest_sdk_platform_interface.dart';
 
 class Carrot {
   /// Setup SDK
-  static Future<void> setup(String appId, String apiKey, {String? appGroup}) {
-    return CarrotquestSdkPlatform.instance.setup(appId, apiKey, appGroup);
+  static Future<void> setup(String appId, String apiKey, bool isLightTheme, {String? appGroup}) {
+    return CarrotquestSdkPlatform.instance.setup(appId, apiKey, isLightTheme, appGroup);
   }
 
   /// Authentification user
@@ -49,10 +49,8 @@ class Carrot {
   }
 
   /// Send FCM push to Carrot quest SDK
-  static Future<void> sendFirebasePushNotification(
-      Map<String, dynamic> message) {
-    return CarrotquestSdkPlatform.instance
-        .sendFirebasePushNotification(message);
+  static Future<void> sendFirebasePushNotification(Map<String, dynamic> message) {
+    return CarrotquestSdkPlatform.instance.sendFirebasePushNotification(message);
   }
 
   /// Check Carrot quest push
