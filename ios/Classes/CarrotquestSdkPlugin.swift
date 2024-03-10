@@ -48,10 +48,10 @@ public class CarrotquestSdkPlugin: NSObject, FlutterPlugin {
     guard let args = call.arguments as? NSDictionary else { return }
     guard let apiKey = args["api_key"] as? String else { return }
     let appGroup = args["app_group"] as? String
-    guard let isLightMode = args["is_light_mode"] as? Bool else { return }
+    guard let isLightTheme = args["is_light_theme"] as? Bool else { return }
     Carrot.shared.setup(
         withApiKey: apiKey,
-        withTheme: isLightMode ? Carrot.Theme.light : Carrot.Theme.dark,
+        withTheme: isLightTheme ? Carrot.Theme.light : Carrot.Theme.dark,
         withAppGroup: appGroup,
         successHandler: {
             Carrot.shared.getUnreadConversationsCount { [weak self] count in
