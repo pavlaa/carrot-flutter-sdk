@@ -175,9 +175,9 @@ class CarrotquestSdkPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
                                 }
                             })
                             if (isLightTheme == true) {
-                                Carrot.setTheme(ThemeSdk.DARK)
-                            } else {
                                 Carrot.setTheme(ThemeSdk.LIGHT)
+                            } else {
+                                Carrot.setTheme(ThemeSdk.DARK)
                             }
                             result.success(null)
                         } else {
